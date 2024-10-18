@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2ed90aaf5fa83409883ecb6b0c6856, type: 3}
+  m_Name: Robot3
+  m_EditorClassIdentifier: 
+  characterName: NanoDex
+  baseCost: 225
+  isUnlocked: 0
+  characterSprite: {fileID: -2329314245680086756, guid: 25a5dc09f62fa344ea879adac2067386, type: 3}
+  category: 3
+  index: 26
