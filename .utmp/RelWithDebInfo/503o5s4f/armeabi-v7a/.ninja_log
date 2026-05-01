@@ -1,0 +1,12 @@
+# ninja log v5
+73	710	7513972804091171	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	a5efc2ceb4f4dbc3
+714	3144	7513972824507098	C:/Users/Bekim/EndlessFall/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/503o5s4f/obj/armeabi-v7a/libswappywrapper.so	6a7b6af7baaa5689
+19	3776	7513972834837804	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c3622494a355f00
+44	3982	7513972836433164	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	f64d0869a760bcd
+27	4020	7513972837423110	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1b1e60c8b3718490
+61	4116	7513972838383139	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	7a3dde36d6326294
+52	4360	7513972841008363	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	12d41a8c9f7e738c
+11	4436	7513972841358381	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	8dcc829d8e8b25b8
+35	5353	7513972850924391	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	f466ce256b87869b
+1	5382	7513972851174374	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	3240ddbb09fe035c
+5383	5642	7513972853814403	C:/Users/Bekim/EndlessFall/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/503o5s4f/obj/armeabi-v7a/libgame.so	39abdaedf96fc9ae

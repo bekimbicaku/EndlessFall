@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (isHelding)
         {
-            fallSpeed = 12f;
+            fallSpeed = 15f;
             fallTimeElapsed = 0f;
         }
         else

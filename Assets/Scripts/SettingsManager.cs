@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;  
-using Facebook.Unity;
 using System.Collections;
 
 public class SettingsManager : MonoBehaviour
@@ -14,8 +13,6 @@ public class SettingsManager : MonoBehaviour
     public TextMeshProUGUI playerNameText;        // Player name UI element
     public Image playerProfilePicture;            // Player profile picture UI element
     public TextMeshProUGUI highScoreText;         // High score UI element
-
-    public FacebookManager facebookManager;       // Reference to FacebookManager
 
     private string playerUsername;
     private Sprite playerProfilePic;
@@ -94,19 +91,9 @@ public class SettingsManager : MonoBehaviour
     // Load player profile details (name, picture, high score)
     public void LoadPlayerProfile()
     {
-        // Check if the player is logged in via Facebook
-        if (facebookManager != null && FB.IsLoggedIn)
-        {
-            // Use Facebook username and profile picture
-            playerUsername = facebookManager.FB_userName.text;
-            
-        }
-        else
-        {
-            // Use guest username and a default guest profile picture
-            playerUsername = PlayerPrefs.GetString("GuestName", "Guest");
-            playerProfilePicture.sprite = GetGuestProfilePicture();  // Load a default guest profile picture
-        }
+        // Use local guest profile data so this menu works without external social SDKs.
+        playerUsername = PlayerPrefs.GetString("GuestName", "Guest");
+        playerProfilePicture.sprite = GetGuestProfilePicture();
 
         
         // Update the UI with player details

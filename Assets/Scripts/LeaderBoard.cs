@@ -1,6 +1,5 @@
 using Dan.Main;
 using Dan.Models;
-using Facebook.Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +16,6 @@ namespace Dan.Demo
         [SerializeField] private TextMeshProUGUI[] _entryScoreFields;
 
         public GameObject LeaderboardPanel;
-        public FacebookManager facebookManager; // Reference to FacebookManager
 
         [SerializeField] private TMP_InputField _playerUsernameInput;
 
@@ -32,18 +30,7 @@ namespace Dan.Demo
         }
         public void LeadreboardLoad()
         {
-
-            // Check if the player is logged in via Facebook
-            if (facebookManager != null && FB.IsLoggedIn)
-            {
-                // Use Facebook username
-                playerUsername = facebookManager.FB_userName.text;
-            }
-            else
-            {
-                // Use guest username
-                playerUsername = PlayerPrefs.GetString("GuestName", "Guest");
-            }
+            playerUsername = PlayerPrefs.GetString("GuestName", "Guest");
         }
 
         public void Load() => LeaderboardCreator.GetLeaderboard(_leaderboardPublicKey, OnLeaderboardLoaded);
@@ -62,8 +49,8 @@ namespace Dan.Demo
                     _entryBackgrounds[i].color = Color.white;  // Reset to default background color
             }
 
-            // Get the current player's username (Facebook or Guest)
-            string currentPlayerUsername = FB.IsLoggedIn ? facebookManager.FB_userName.text : PlayerPrefs.GetString("GuestName", "Guest");
+            // Use local guest username in leaderboard highlighting.
+            string currentPlayerUsername = PlayerPrefs.GetString("GuestName", "Guest");
 
             // Populate leaderboard entries
             for (int i = 0; i < entries.Length; i++)

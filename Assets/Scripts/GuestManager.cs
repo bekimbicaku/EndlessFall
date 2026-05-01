@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Facebook.Unity;
 using Dan.Demo;
 
 public class GuestManager : MonoBehaviour
@@ -13,13 +12,14 @@ public class GuestManager : MonoBehaviour
     public Button chooseImageButton;
     public Button confirmButton;
 
-    public List<Texture2D> availableProfilePics; // Lista e fotove të paracaktuara
+    public List<Texture2D> availableProfilePics; // Lista e fotove tÃ« paracaktuara
     private int currentImageIndex = 0;           // Indeksi i fotos aktuale
     private Texture2D selectedImage;
 
     public GameObject mainGamePanel;
     public GameObject settingsPanel;
     public GameObject loginPanel;
+    public GameObject AreyyousurePanel;
 
     public TextMeshProUGUI warningTxt;
 
@@ -27,16 +27,16 @@ public class GuestManager : MonoBehaviour
 
     private void Start()
     {
-        // Kontrollojmë nëse lojtari është regjistruar më parë
+        // KontrollojmÃ« nÃ«se lojtari Ã«shtÃ« regjistruar mÃ« parÃ«
         if (PlayerPrefs.HasKey("isLoggedIn") && PlayerPrefs.GetInt("isLoggedIn") == 1)
         {
-            // Lojtari është regjistruar, fshihni panelin e loginit dhe shfaqni lojën
+            // Lojtari Ã«shtÃ« regjistruar, fshihni panelin e loginit dhe shfaqni lojÃ«n
             HideLoginPanel();
             ShowMainGamePanel();
         }
         else
         {
-            // Lojtari nuk është regjistruar, shfaqim panelin e loginit
+            // Lojtari nuk Ã«shtÃ« regjistruar, shfaqim panelin e loginit
             loginPanel.SetActive(true);
             mainGamePanel.SetActive(false);
         }
@@ -57,10 +57,10 @@ public class GuestManager : MonoBehaviour
         confirmButton.onClick.AddListener(SetGuestInfo);
     }
 
-    // Lejon lojtarin të zgjedhë foton e radhës nga lista
+    // Lejon lojtarin tÃ« zgjedhÃ« foton e radhÃ«s nga lista
     public void ChooseNextImage()
     {
-        currentImageIndex = (currentImageIndex + 1) % availableProfilePics.Count; // Ciklo nëpër lista
+        currentImageIndex = (currentImageIndex + 1) % availableProfilePics.Count; // Ciklo nÃ«pÃ«r lista
         selectedImage = availableProfilePics[currentImageIndex];  // Now explicitly set the selected image
         guestProfilePic.texture = selectedImage;
     }
@@ -104,7 +104,7 @@ public class GuestManager : MonoBehaviour
         warningTxt.text = "";
     }
 
-    // Ruaj informacionin e guest-it në PlayerPrefs ose një burim tjetër të dhënash
+    // Ruaj informacionin e guest-it nÃ« PlayerPrefs ose njÃ« burim tjetÃ«r tÃ« dhÃ«nash
     void SaveGuestInfo(string name, Texture2D profilePic)
     {
         PlayerPrefs.SetString("GuestName", name);
@@ -122,13 +122,13 @@ public class GuestManager : MonoBehaviour
         Debug.Log("Guest info saved: Name - " + name);
     }
 
-    // Merr emrin e guest-it për t'u përdorur në leaderboard ose në lojë
+    // Merr emrin e guest-it pÃ«r t'u pÃ«rdorur nÃ« leaderboard ose nÃ« lojÃ«
     public static string GetGuestName()
     {
         return PlayerPrefs.GetString("GuestName", "Guest");
     }
 
-    // Merr foton e profilit të guest-it për t'u përdorur në leaderboard ose në lojë
+    // Merr foton e profilit tÃ« guest-it pÃ«r t'u pÃ«rdorur nÃ« leaderboard ose nÃ« lojÃ«
     public static Texture2D GetGuestProfilePic()
     {
         string imageString = PlayerPrefs.GetString("GuestProfilePic", "");
@@ -143,25 +143,25 @@ public class GuestManager : MonoBehaviour
         return null;
     }
 
-    // Funksion shembull për të integruar me leaderboard-in
+    // Funksion shembull pÃ«r tÃ« integruar me leaderboard-in
     public void SubmitScoreToLeaderboard(int score)
     {
-        string playerName = FB.IsLoggedIn ? AccessToken.CurrentAccessToken.UserId : GetGuestName();
-        Texture2D playerImage = FB.IsLoggedIn ? null : GetGuestProfilePic(); // Për Facebook, foto do të menaxhohet ndryshe
+        string playerName = GetGuestName();
+        Texture2D playerImage = GetGuestProfilePic();
 
-        // Integroni informacionin e lojtarit (emri, foto, rezultati) me leaderboard-in tuaj këtu
+        // Integroni informacionin e lojtarit (emri, foto, rezultati) me leaderboard-in tuaj kÃ«tu
         Debug.Log("Submitting score to leaderboard: Name - " + playerName + ", Score - " + score);
-        // Thirrja drejt sistemit tuaj të leaderboard-it
+        // Thirrja drejt sistemit tuaj tÃ« leaderboard-it
     }
     void HideLoginPanel()
     {
-        // Kodi për të fshehur panelin e loginit
+        // Kodi pÃ«r tÃ« fshehur panelin e loginit
         loginPanel.SetActive(false);
     }
 
     void ShowMainGamePanel()
     {
-        // Kodi për të shfaqur panelin kryesor të lojës
+        // Kodi pÃ«r tÃ« shfaqur panelin kryesor tÃ« lojÃ«s
         mainGamePanel.SetActive(true);
     }
 
@@ -171,13 +171,6 @@ public class GuestManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
 
-        // Check if the player is logged in with Facebook
-        if (FB.IsLoggedIn)
-        {
-            // Log out from Facebook
-            FB.LogOut();
-        }
-
         // Optionally, reset other game-related variables here if needed
         // Example:
         // ResetPlayerState();
@@ -185,6 +178,7 @@ public class GuestManager : MonoBehaviour
         loginPanel.SetActive(true);
         mainGamePanel.SetActive(false);
         settingsPanel.SetActive(false);
+        AreyyousurePanel.SetActive(false);
         Debug.Log("Account deleted and logged out successfully.");
     }
 
